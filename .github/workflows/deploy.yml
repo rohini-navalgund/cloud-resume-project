@@ -1,5 +1,6 @@
 name: Cloud Resume Deploy
 
+# Run workflow on push to main branch
 on:
   push:
     branches: [ main ]
@@ -9,9 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # 1. Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2. Configure AWS credentials from GitHub Secrets
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -19,13 +22,22 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
 
+      # 3. Deploy frontend to S3
       - name: Deploy frontend to S3
         run: |
+          echo "Deploying frontend to S3..."
           aws s3 cp frontend/ s3://rohini-cloudresume-frontend/ --recursive --acl public-read
+          echo "Frontend deployed successfully!"
 
-      - name: Deploy backend Lambda
+      # 4. Deploy backend Lambda
+      - name: Deploy Lambda function
         run: |
-          zip -r lambda_package.zip backend/*
+          echo "Packaging Lambda backend..."
+          cd backend
+          zip -r ../lambda_package.zip .
+          cd ..
+          echo "Updating Lambda function..."
           aws lambda update-function-code \
             --function-name CloudResumeBackend \
             --zip-file fileb://lambda_package.zip
+          echo "Lambda function updated successfully!"
