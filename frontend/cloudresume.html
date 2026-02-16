@@ -125,7 +125,12 @@ async function callLambda() {
 
         const response = await fetch("https://crficjyfc8.execute-api.ap-south-1.amazonaws.com/prod");
 
-        const data = await response.json();
+        let data = await response.json();
+
+        // ✅ Handle API Gateway proxy response
+        if (data.body) {
+            data = JSON.parse(data.body);
+        }
 
         loader.style.display = "none";
 
