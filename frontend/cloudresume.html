@@ -1,117 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serverless Web App CI/CD</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #dbeafe, #c7d2fe);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
+<title>Serverless Web App CI/CD</title>
 
-        h1 {
-            color: #1e3a8a;
-            font-size: 3rem;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-            animation: float 3s ease-in-out infinite alternate;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-        button {
-            padding: 12px 25px;
-            font-size: 18px;
-            cursor: pointer;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(90deg, #6366f1, #818cf8);
-            color: white;
-            margin-top: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            animation: floatButton 2.5s ease-in-out infinite alternate;
-        }
+<style>
 
-        button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #f8fafc);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        #output {
-            margin-top: 25px;
-            font-size: 22px;
-            color: #1e3a8a;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-            animation: fadeIn 1s ease-in-out;
-        }
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    animation: fadeIn 0.8s ease;
+}
 
-        /* Floating animations */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-15px); }
-        }
+h1 {
+    margin-bottom: 10px;
+    color: #1e293b;
+    font-weight: 600;
+}
 
-        @keyframes floatButton {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-8px); }
-        }
+p {
+    color: #64748b;
+    margin-bottom: 25px;
+}
 
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+button {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    border: none;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-        /* Subtle background bubbles */
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(99,102,241,0.15);
-            animation: rise 10s infinite linear;
-        }
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(79,70,229,0.3);
+}
 
-        @keyframes rise {
-            0% { transform: translateY(100vh) scale(0.5); }
-            100% { transform: translateY(-20vh) scale(1); }
-        }
-    </style>
+.counter {
+    font-size: 28px;
+    font-weight: 600;
+    color: #4f46e5;
+    margin-top: 20px;
+}
+
+.message {
+    margin-top: 15px;
+    color: #334155;
+}
+
+.loader {
+    border: 4px solid #e5e7eb;
+    border-top: 4px solid #4f46e5;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 15px auto;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
 </head>
+
 <body>
 
-    <!-- Floating bubbles -->
-    <div class="bubble" style="width: 60px; height: 60px; left: 10%; animation-duration: 12s;"></div>
-    <div class="bubble" style="width: 80px; height: 80px; left: 30%; animation-duration: 15s;"></div>
-    <div class="bubble" style="width: 50px; height: 50px; left: 70%; animation-duration: 10s;"></div>
+<div class="container">
 
     <h1>Serverless Web App CI/CD</h1>
-    <button onclick="callAPI()">Call Backend Lambda</button>
-    <div id="output">Visitor count will appear here</div>
+    <p>Click the button to interact with backend Lambda</p>
 
-   <script>
-async function callAPI() {
-    const apiUrl = "https://crficjyfc8.execute-api.ap-south-1.amazonaws.com/prod/hello";
+    <button onclick="callLambda()">Call Backend Lambda</button>
+
+    <div class="loader" id="loader"></div>
+
+    <div class="counter" id="count">Visitors: —</div>
+    <div class="message" id="message"></div>
+
+</div>
+
+<script>
+
+async function callLambda() {
+
+    const loader = document.getElementById("loader");
+    const countDiv = document.getElementById("count");
+    const messageDiv = document.getElementById("message");
+
+    loader.style.display = "block";
+    messageDiv.innerText = "";
 
     try {
-        const response = await fetch(apiUrl);
+
+        // 🔴 REPLACE THIS WITH YOUR API GATEWAY URL
+        const response = await fetch("https://abc123.execute-api.ap-south-1.amazonaws.com/prod");
+
+
         const data = await response.json();
 
-        document.getElementById("output").innerText =
-            "Visitors: " + data.count;
+        loader.style.display = "none";
 
-    } catch (err) {
-        document.getElementById("output").innerText =
-            "Error calling API";
+        countDiv.innerText = "Visitors: " + data.count;
+        messageDiv.innerText = data.message;
+
+    } catch (error) {
+
+        loader.style.display = "none";
+        messageDiv.innerText = "Error connecting to backend.";
+
+        console.error(error);
     }
 }
-</script>
 
+</script>
 
 </body>
 </html>
