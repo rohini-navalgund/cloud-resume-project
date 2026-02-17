@@ -1,161 +1,210 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Serverless Web App</title>
+<title>Serverless Web App | AWS CI/CD Project</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-body{
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     font-family:'Poppins',sans-serif;
-    background: linear-gradient(135deg,#0f172a,#1e293b);
+    background:linear-gradient(270deg,#0f172a,#1e3a8a,#4f46e5,#6366f1);
+    background-size:600% 600%;
+    animation:gradientBG 15s ease infinite;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     color:white;
-    text-align:center;
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 .container{
-    padding:60px 20px;
-    animation:fadeIn 1.5s ease;
+    width:90%;
+    max-width:750px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(18px);
+    border-radius:22px;
+    padding:45px;
+    text-align:center;
+    box-shadow:0 25px 50px rgba(0,0,0,0.35);
+    animation:fadeUp 1.2s ease;
+}
+
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(40px);}
+    to{opacity:1;transform:translateY(0);}
 }
 
 h1{
-    font-size:40px;
-    margin-bottom:10px;
-}
-
-.subtitle{
-    font-size:18px;
-    opacity:0.9;
-}
-
-.aws-box{
-    margin-top:40px;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:15px;
-}
-
-.aws{
-    background:#2563eb;
-    padding:12px 20px;
-    border-radius:8px;
-    font-weight:500;
-    transition:0.3s;
-}
-
-.aws:hover{
-    transform:scale(1.1);
-    background:#1d4ed8;
-}
-
-button{
-    margin-top:30px;
-    padding:15px 30px;
-    font-size:16px;
-    border:none;
-    border-radius:8px;
-    background:#22c55e;
-    color:white;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-button:hover{
-    transform:scale(1.1);
-    background:#16a34a;
-}
-
-.counter{
-    margin-top:20px;
-    font-size:22px;
+    font-size:2.4rem;
+    margin-bottom:12px;
     font-weight:600;
 }
 
-.info{
-    margin-top:40px;
-    max-width:700px;
-    margin-left:auto;
-    margin-right:auto;
-    line-height:1.6;
+.subtitle{
+    font-size:1rem;
+    opacity:0.85;
+    margin-bottom:25px;
+}
+
+.description{
+    font-size:14px;
+    line-height:1.7;
     opacity:0.9;
+    margin-bottom:30px;
+}
+
+.section-title{
+    margin-top:25px;
+    margin-bottom:15px;
+    font-weight:600;
+    font-size:18px;
+}
+
+.tech-stack{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.tech{
+    padding:8px 14px;
+    background:rgba(255,255,255,0.15);
+    border-radius:20px;
+    font-size:13px;
+    transition:0.3s;
+}
+
+.tech:hover{
+    background:rgba(255,255,255,0.25);
+    transform:translateY(-2px);
+}
+
+button{
+    padding:15px 32px;
+    font-size:16px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    background:linear-gradient(90deg,#6366f1,#8b5cf6);
+    color:white;
+    transition:0.35s;
+    box-shadow:0 12px 25px rgba(0,0,0,0.35);
+    font-weight:500;
+}
+
+button:hover{
+    transform:translateY(-4px) scale(1.03);
+    box-shadow:0 18px 35px rgba(0,0,0,0.45);
+}
+
+#output{
+    margin-top:28px;
+    font-size:24px;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.highlight{
+    color:#a5b4fc;
 }
 
 .footer{
-    margin-top:60px;
-    font-size:14px;
-    opacity:0.7;
-}
-
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(20px);}
-    to{opacity:1; transform:translateY(0);}
+    margin-top:35px;
+    font-size:13px;
+    opacity:0.75;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
+```
 <h1>☁️ Serverless Web Application</h1>
 
 <div class="subtitle">
-AWS Cloud Project with CI/CD Pipeline
+    Production-Ready AWS Cloud Project with Automated CI/CD Pipeline
 </div>
 
-<div class="aws-box">
-<div class="aws">S3</div>
-<div class="aws">CloudFront</div>
-<div class="aws">API Gateway</div>
-<div class="aws">Lambda</div>
-<div class="aws">DynamoDB</div>
-<div class="aws">GitHub Actions</div>
+<div class="description">
+    This project demonstrates a scalable and cost-efficient serverless architecture 
+    deployed entirely on Amazon Web Services. The application integrates multiple 
+    cloud services including compute, storage, API management, and database layers 
+    with a fully automated deployment workflow using GitHub Actions.
+    <br><br>
+    The goal of this implementation is to showcase practical cloud engineering skills 
+    such as infrastructure automation, backend integration, monitoring readiness, 
+    and global content delivery optimization.
 </div>
 
-<button onclick="callBackend()">Call Backend Lambda</button>
+<div class="section-title">Technologies Used</div>
 
-<div class="counter">
-Visitors: <span id="count">Loading...</span>
+<div class="tech-stack">
+    <div class="tech">Amazon S3</div>
+    <div class="tech">CloudFront CDN</div>
+    <div class="tech">API Gateway</div>
+    <div class="tech">AWS Lambda</div>
+    <div class="tech">DynamoDB</div>
+    <div class="tech">GitHub Actions CI/CD</div>
 </div>
 
-<div class="info">
-This project demonstrates a fully serverless cloud architecture deployed on AWS.
-It integrates frontend hosting, backend compute, database storage, and automated
-CI/CD pipelines using GitHub Actions. The system automatically scales and provides
-high availability with minimal infrastructure management.
-</div>
+<button onclick="callAPI()">View Live Visitor Count</button>
+
+<div id="output">Visitors: Loading...</div>
 
 <div class="footer">
-Built using AWS Serverless Architecture • Cloud Engineering Project
+    Designed & Deployed using AWS Serverless Architecture • Cloud Engineering Portfolio Project
 </div>
+```
 
 </div>
 
 <script>
 
-const API_URL = "https://efwenooeld.execute-api.ap-south-1.amazonaws.com/prod";
+async function callAPI() {
 
-async function callBackend(){
-    try{
-        const response = await fetch(API_URL);
+    const apiUrl = "https://crficjyfc8.execute-api.ap-south-1.amazonaws.com/prod/hello";
+
+    try {
+
+        const response = await fetch(apiUrl);
         const data = await response.json();
 
-        document.getElementById("count").innerText = data.count;
-    }
-    catch(error){
-        document.getElementById("count").innerText = "Error connecting";
-        console.error(error);
+        document.getElementById("output").innerHTML =
+            "Visitors: <span class='highlight'>" + (data.count ?? "N/A") + "</span>";
+
+    } catch (err) {
+
+        document.getElementById("output").innerText =
+            "Error connecting to backend";
+
     }
 }
 
-callBackend();
+callAPI();
 
 </script>
 
