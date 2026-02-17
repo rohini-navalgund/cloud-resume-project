@@ -4,81 +4,99 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Serverless Web App CI/CD</title>
+<title>Serverless Web App</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+
 body{
     margin:0;
     font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#0f172a,#1e293b);
+    background: linear-gradient(135deg,#0f172a,#1e293b);
     color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+    text-align:center;
 }
 
 .container{
-    text-align:center;
-    max-width:800px;
-    padding:40px;
-    border-radius:20px;
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(10px);
-    box-shadow:0 10px 30px rgba(0,0,0,0.4);
-    animation:fadeIn 1.2s ease-in-out;
+    padding:60px 20px;
+    animation:fadeIn 1.5s ease;
 }
 
 h1{
-    font-size:2.5rem;
+    font-size:40px;
     margin-bottom:10px;
 }
 
 .subtitle{
-    color:#94a3b8;
-    margin-bottom:30px;
+    font-size:18px;
+    opacity:0.9;
 }
 
-.tech{
-    margin:20px 0;
-    font-size:14px;
-    color:#cbd5f5;
+.aws-box{
+    margin-top:40px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+}
+
+.aws{
+    background:#2563eb;
+    padding:12px 20px;
+    border-radius:8px;
+    font-weight:500;
+    transition:0.3s;
+}
+
+.aws:hover{
+    transform:scale(1.1);
+    background:#1d4ed8;
 }
 
 button{
-    padding:12px 28px;
-    border:none;
-    border-radius:30px;
+    margin-top:30px;
+    padding:15px 30px;
     font-size:16px;
-    background:linear-gradient(135deg,#38bdf8,#6366f1);
+    border:none;
+    border-radius:8px;
+    background:#22c55e;
     color:white;
     cursor:pointer;
     transition:0.3s;
 }
 
 button:hover{
-    transform:scale(1.05);
-    box-shadow:0 5px 20px rgba(99,102,241,0.6);
+    transform:scale(1.1);
+    background:#16a34a;
 }
 
 .counter{
-    margin-top:25px;
-    font-size:20px;
+    margin-top:20px;
+    font-size:22px;
     font-weight:600;
 }
 
+.info{
+    margin-top:40px;
+    max-width:700px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.6;
+    opacity:0.9;
+}
+
 .footer{
-    margin-top:30px;
-    font-size:13px;
-    color:#94a3b8;
+    margin-top:60px;
+    font-size:14px;
+    opacity:0.7;
 }
 
 @keyframes fadeIn{
-    from{opacity:0;transform:translateY(20px);}
-    to{opacity:1;transform:translateY(0);}
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
 }
+
 </style>
 </head>
 
@@ -86,52 +104,58 @@ button:hover{
 
 <div class="container">
 
-    <h1>☁️ Serverless Web Application</h1>
+<h1>☁️ Serverless Web Application</h1>
 
-    <div class="subtitle">
-        AWS Cloud Project with Automated CI/CD Deployment
-    </div>
+<div class="subtitle">
+AWS Cloud Project with CI/CD Pipeline
+</div>
 
-    <p>
-        This project demonstrates a fully serverless architecture built on AWS,
-        integrating scalable backend services with automated deployment pipelines.
-        Designed to showcase real-world cloud engineering skills including
-        infrastructure automation, event-driven computing, and global content delivery.
-    </p>
+<div class="aws-box">
+<div class="aws">S3</div>
+<div class="aws">CloudFront</div>
+<div class="aws">API Gateway</div>
+<div class="aws">Lambda</div>
+<div class="aws">DynamoDB</div>
+<div class="aws">GitHub Actions</div>
+</div>
 
-    <div class="tech">
-        S3 • CloudFront • API Gateway • Lambda • DynamoDB • GitHub Actions
-    </div>
+<button onclick="callBackend()">Call Backend Lambda</button>
 
-    <button onclick="getVisitors()">View Visitor Count</button>
+<div class="counter">
+Visitors: <span id="count">Loading...</span>
+</div>
 
-    <div class="counter" id="visitorCount">
-        Visitors: —
-    </div>
+<div class="info">
+This project demonstrates a fully serverless cloud architecture deployed on AWS.
+It integrates frontend hosting, backend compute, database storage, and automated
+CI/CD pipelines using GitHub Actions. The system automatically scales and provides
+high availability with minimal infrastructure management.
+</div>
 
-    <div class="footer">
-        Built using AWS Serverless Architecture with CI/CD Pipeline
-    </div>
+<div class="footer">
+Built using AWS Serverless Architecture • Cloud Engineering Project
+</div>
 
 </div>
 
 <script>
 
-const API_URL = "YOUR_API_GATEWAY_ENDPOINT_HERE";
+const API_URL = "https://efwenooeld.execute-api.ap-south-1.amazonaws.com/prod";
 
-async function getVisitors(){
+async function callBackend(){
     try{
         const response = await fetch(API_URL);
         const data = await response.json();
 
-        document.getElementById("visitorCount").innerText =
-            "Visitors: " + data.count;
-
-    }catch(error){
-        document.getElementById("visitorCount").innerText =
-            "Error connecting to backend";
+        document.getElementById("count").innerText = data.count;
+    }
+    catch(error){
+        document.getElementById("count").innerText = "Error connecting";
+        console.error(error);
     }
 }
+
+callBackend();
 
 </script>
 
