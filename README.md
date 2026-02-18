@@ -1,22 +1,21 @@
 # ☁️ Serverless Web Application with CI/CD on AWS
 
-A production-ready serverless web application deployed on AWS using modern cloud architecture and automated CI/CD pipeline.
+A production-ready serverless web application deployed on AWS using modern cloud architecture and an automated CI/CD pipeline.
+
 This project demonstrates real-world cloud engineering skills including infrastructure integration, backend automation, and global content delivery.
 
 ---
 
 ##  Live Demo
 
-🔗 CloudFront URL: https://d1q2xil4wk3pol.cloudfront.net
+🔗 **CloudFront URL:**
+https://d1q2xil4wk3pol.cloudfront.net
 
 ---
 
 ##  Architecture Diagram
 
-## 🏗️ Architecture Diagram
-
-[Serverless Architecture](assets/architecture.png)
-
+![Architecture](architecture.png)
 
 ---
 
@@ -37,15 +36,15 @@ The system is highly scalable, cost-efficient, and requires zero server manageme
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-✅ Fully serverless architecture
-✅ Automated CI/CD deployment pipeline
-✅ Global CDN delivery with low latency
-✅ Real-time visitor counter using DynamoDB
-✅ Secure API integration
-✅ Infrastructure aligned with AWS best practices
-✅ Production-style deployment workflow
+* ✅ Fully serverless architecture
+* ✅ Automated CI/CD deployment pipeline
+* ✅ Global CDN delivery with low latency
+* ✅ Real-time visitor counter using DynamoDB
+* ✅ Secure API integration
+* ✅ Infrastructure aligned with AWS best practices
+* ✅ Production-style deployment workflow
 
 ---
 
@@ -65,7 +64,7 @@ The system is highly scalable, cost-efficient, and requires zero server manageme
 
 The project uses GitHub Actions to automatically deploy frontend changes to AWS.
 
-Workflow:
+### Workflow
 
 1. Developer pushes code to GitHub
 2. GitHub Actions workflow triggers
@@ -75,8 +74,7 @@ Workflow:
 
 ---
 
-
-## 📊 Learning Outcomes
+##  Learning Outcomes
 
 This project demonstrates practical experience with:
 
@@ -89,7 +87,7 @@ This project demonstrates practical experience with:
 
 ---
 
-## 🔐 Security & Best Practices
+##  Security & Best Practices
 
 * IAM roles with least privilege access
 * Managed AWS services for reliability
@@ -114,4 +112,3 @@ Cloud & DevOps Enthusiast
 * Multi-region deployment
 
 ---
-
