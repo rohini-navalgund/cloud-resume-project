@@ -15,7 +15,7 @@ https://d1q2xil4wk3pol.cloudfront.net
 
 ##  Architecture Diagram
 
-![Architecture](assets/architecture.png)
+![Architecture](architecture.png)
 
 
 ---
