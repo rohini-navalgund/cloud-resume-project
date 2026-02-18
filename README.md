@@ -19,7 +19,7 @@ This project demonstrates real-world cloud engineering skills including infrastr
 
 
 ---
-https://d1q2xil4wk3pol.cloudfront.net
+
 ##  Project Overview
 
 This project implements a fully serverless visitor tracking web application using AWS managed services.
